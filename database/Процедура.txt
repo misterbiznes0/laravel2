@@ -1,0 +1,14 @@
+В SQLite db browser процедуры хранить нельзя, так что сделала так
+
+SELECT 
+    u.name AS customer_name,
+    COUNT(b.id) AS total_orders,
+    SUM(json_array_length(b.selected_seats)) AS total_tickets,
+    SUM(b.total_price) AS total_amount
+FROM bookings b
+JOIN users u ON u.id = b.user_id
+JOIN movie_sessions ms ON ms.id = b.movie_session_id
+WHERE datetime(ms.start_time) BETWEEN datetime('2026-05-01') AND datetime('2026-05-31')
+GROUP BY u.id;
+
+datetime('2026-05-01') AND datetime('2026-05-31') - это меняется под нужные даты

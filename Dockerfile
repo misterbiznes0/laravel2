@@ -34,7 +34,7 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 RUN npm install
-RUN npm run build
+RUN npm run build && ls -la public && ls -la public/build
 
 RUN cp .env.example .env
 
